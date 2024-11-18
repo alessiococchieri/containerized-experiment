@@ -10,6 +10,16 @@ This repository contains code for **Containerization and Orchestration for Resea
 
 ---
 
+## Preliminaries & Quick Start
+
+- The project uses a pre-built local Docker image based on `nvidia/cuda:12.3.2-devel-ubuntu22.04`.
+- A minimum of two GPU devices is required to run the experiments.
+- To get started, run the following command to build and start the Docker containers:
+
+```bash
+docker-compose up --build
+```
+
 ## Project Overview
 
 This project benchmarks Large Language Models (LLMs) on mathematical reasoning tasks, specifically evaluating the performance of **Qwen2.5-Math-1.5B-Instruct** on the **GSM8K** benchmark.
