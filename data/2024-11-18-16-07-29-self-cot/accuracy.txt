@@ -1,0 +1,4 @@
+Experiment ID: 8960900955e88ff9822d3eb2b740ba270eaf5443a2bd3ff408288d1865d147c63bc75b0fd6ba94a55e1b39fc88359c5f5de35a7ccf327ddb38ac86566d66865a
+Accuracy: 87.0
+----------------------
+

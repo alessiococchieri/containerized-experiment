@@ -1,0 +1,7 @@
+MODE: self-cot
+MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
+N_OUTPUTS: 4
+RANDOM_STATE: 42
+TEMPERATURE: 0.7
+TEST_SIZE: 0.1
+TOP_P: 0.8

@@ -1,0 +1,14 @@
+INFO 11-18 15:42:45 config.py:350] This model supports multiple tasks: {'embedding', 'generate'}. Defaulting to 'generate'.
+INFO 11-18 15:42:45 llm_engine.py:249] Initializing an LLM engine (v0.6.4.post1) with config: model='Qwen/Qwen2.5-Math-1.5B-Instruct', speculative_config=None, tokenizer='Qwen/Qwen2.5-Math-1.5B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, quantization_param_path=None, device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='outlines'), observability_config=ObservabilityConfig(otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=42, served_model_name=Qwen/Qwen2.5-Math-1.5B-Instruct, num_scheduler_steps=1, chunked_prefill_enabled=False multi_step_stream_outputs=True, enable_prefix_caching=False, use_async_output_proc=True, use_cached_outputs=False, chat_template_text_format=string, mm_processor_kwargs=None, pooler_config=None)
+INFO 11-18 15:42:49 selector.py:135] Using Flash Attention backend.
+INFO 11-18 15:42:50 model_runner.py:1072] Starting to load model Qwen/Qwen2.5-Math-1.5B-Instruct...
+INFO 11-18 15:42:50 weight_utils.py:243] Using model weights format ['*.safetensors']
+INFO 11-18 15:45:48 weight_utils.py:288] No model.safetensors.index.json found in remote.
+INFO 11-18 15:45:50 model_runner.py:1077] Loading model weights took 2.8797 GB
+INFO 11-18 15:45:50 worker.py:232] Memory profiling results: total_gpu_memory=23.68GiB initial_memory_usage=4.81GiB peak_torch_memory=4.28GiB memory_usage_post_profile=4.84GiB non_torch_memory=1.95GiB kv_cache_size=16.27GiB gpu_memory_utilization=0.95
+INFO 11-18 15:45:51 gpu_executor.py:113] # GPU blocks: 38079, # CPU blocks: 9362
+INFO 11-18 15:45:51 gpu_executor.py:117] Maximum concurrency for 4096 tokens per request: 148.75x
+INFO 11-18 15:45:56 model_runner.py:1400] Capturing cudagraphs for decoding. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI.
+INFO 11-18 15:45:56 model_runner.py:1404] If out-of-memory error occurs during cudagraph capture, consider decreasing `gpu_memory_utilization` or switching to eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+INFO 11-18 15:46:33 model_runner.py:1518] Graph capturing finished in 38 secs, took -1.30 GiB
+ACCURACY: 83.0
