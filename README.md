@@ -23,3 +23,34 @@ We assess the model using two common inference techniques for mathematical reaso
 
 ### Objective:
 The primary goal is to verify whether **Self-Consistency Chain-of-Thought** results in higher performance compared to **Greedy Chain-of-Thought**, as it often leads to more robust outcomes in reasoning tasks.
+
+### vLLM
+
+We use the widely-used **vLLM** library to run evaluations with the LLM. vLLM is a fast and easy-to-use library designed for LLM inference and serving, integrating with popular Hugging Face models. It supports high-throughput serving with various decoding algorithms, including batch decoding, which significantly speeds up inference.
+
+However, the library does not support running multiple instances of the process on the same device. As a result, experiments are split across two separate GPUs: one GPU is used for **Greedy CoT** and the other for **Self-CoT**. The number of experiments that can be run in parallel thus depends on the number of available GPUs.
+
+This is achieved in the `docker-compose` file by adding the following lines to specify the device type and ID:
+
+```docker
+deploy:
+  resources:
+    reservations:
+      devices:
+        - capabilities: [ gpu ]
+          device_ids: [ "1" ]
+```
+
+### Environment Parameters
+
+These are the available parameters that can be set for each experiment:
+
+- `RANDOM_STATE`: The random seed used for experiment reproducibility.
+- `MODEL_ID`: The HuggingFace repo ID of the model to use.
+- `MODE`: The mode for running the experiment (e.g., "cot" for *Greedy* or "self-cot" for *Self-consisentency*).
+- `TEMPERATURE`: The temperature value for sampling. 0 for Greedy, while usually > 0.5 for Self-CoT.
+- `TOP_P`: The top-p value for nucleus sampling. Default is 0.8.
+- `TEST_SIZE`: The proportion of the dataset to be used for testing.
+- `BATCH_SIZE`: The number of examples to process in each batch.
+- `N_OUTPUTS`: The number of outputs to generate from the model. 1 for Greedy, while > 1 for Self-CoT.
+
