@@ -66,7 +66,7 @@ if __name__ == "__main__":
     llm = LLM(
         model=MODEL_ID,
         gpu_memory_utilization=.95,
-        dtype="float16",
+        dtype="auto",
         enforce_eager=True,
         trust_remote_code=True,
         tensor_parallel_size=1,
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         })
 
 
-    prompts = prompts[:len(prompts)*TEST_SIZE]
+    prompts = prompts[:int(len(prompts)*TEST_SIZE)]
 
     batches = [prompts[i:i+BATCH_SIZE] for i in range(0, len(prompts), BATCH_SIZE)]
 

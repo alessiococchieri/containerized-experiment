@@ -6,6 +6,11 @@ services:
     volumes: &volumes
       - ./data:/data
     hostname: cot
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
     environment:
       DATA_OWNER: &owner 1157:1157
       MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
@@ -20,6 +25,11 @@ services:
     build: *experiment_build
     volumes: *volumes
     hostname: self-cot
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
     environment:
       DATA_OWNER: *owner
       MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
