@@ -65,7 +65,8 @@ if __name__ == "__main__":
 
     print(f'Running experiment ID {EXPERIMENT_ID[:8]}', file=sys.stderr)
     print(f'Output directory: {OUTPUT_DIR}', file=sys.stderr)
-    print(f'Experiment footprint:\n\t{EXPERIMENT_FOOTPRINT_YAML.replace("\n", "\n\t")}', file=sys.stderr)
+    EXPERIMENT_FOOTPRINT_YAML = EXPERIMENT_FOOTPRINT_YAML.replace("\n", "\n\t")
+    print(f'Experiment footprint:\n\t{EXPERIMENT_FOOTPRINT_YAML}', file=sys.stderr)
 
 
     sampling_params = SamplingParams(
@@ -148,3 +149,6 @@ if __name__ == "__main__":
     with open(f"{OUTPUT_DIR}/accuracy.txt", 'a') as f:
         f.write(f"Experiment ID: {EXPERIMENT_ID}\nAccuracy: {accuracy}\n----------------------\n\n")
     
+    # Save experiment footprint into OUTPUT_DIR/EXPERIMENT_ID.yaml
+    with open(OUTPUT_DIR / f'{EXPERIMENT_ID}.yaml', 'w') as file:
+        yaml.dump(EXPERIMENT_FOOTPRINT, file)
