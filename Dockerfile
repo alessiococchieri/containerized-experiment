@@ -1,4 +1,18 @@
-FROM general-img:latest
+FROM nvidia/cuda:12.3.2-devel-ubuntu22.04
+
+# Install python and general-purpose dependencies
+RUN apt-get update -y && \
+    apt-get install -y curl \
+    git \
+    bash \
+    nano \
+    wget \
+    python3.10 \
+    python3-pip && \
+    apt-get autoremove -y && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /containerized-experiment
 VOLUME "/data"
 ENV DATA_DIR=/data
