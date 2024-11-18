@@ -10,7 +10,8 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - capabilities: [ gpu ]
+              device_ids: [ "2" ]
     environment:
       DATA_OWNER: &owner 1157:1157
       MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
@@ -29,7 +30,8 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - capabilities: [ gpu ]
+              device_ids: [ "1" ]
     environment:
       DATA_OWNER: *owner
       MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
