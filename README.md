@@ -12,7 +12,7 @@ This repository contains code for **Containerization and Orchestration for Resea
 
 ## Preliminaries & Quick Start
 
-- The project uses a pre-built local Docker image based on `nvidia/cuda:12.3.2-devel-ubuntu22.04`.
+- The project uses a Docker image based on `nvidia/cuda:12.3.2-devel-ubuntu22.04`.
 - A minimum of two GPU devices is required to run the experiments.
 - To get started, run the following command to build and start the Docker containers:
 
