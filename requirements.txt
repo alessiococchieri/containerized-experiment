@@ -1,1 +1,13 @@
+torch==2.5.1
+datasets==2.19.2
+transformers==4.46.2
+scipy==1.10.0
+huggingface_hub==0.23.3
+peft==0.11.1
+accelerate @ git+https://github.com/huggingface/accelerate.git
+trl @ git+https://github.com/huggingface/trl.git
+packaging==24.1
+ninja==1.11.1.1
+flash-attn==2.5.9.post1 
+bitsandbytes==0.43.1
 vllm==0.6.4.post1
