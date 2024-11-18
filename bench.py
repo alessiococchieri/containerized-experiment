@@ -13,9 +13,9 @@ import sys
 
 from collections import Counter
 from tqdm import tqdm
-from datasets import load_dataset, Dataset
+from datasets import load_dataset
 from vllm import LLM, SamplingParams
-from transformers import AutoTokenizer, HfArgumentParser
+from transformers import AutoTokenizer
 from huggingface_hub import login
 
 def extract_answer(text):
