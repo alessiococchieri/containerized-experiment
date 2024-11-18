@@ -39,7 +39,7 @@ if __name__ == "__main__":
     MODE = os.getenv('MODE', "cot")
     TEMPERATURE = float(os.getenv('TEMPERATURE', "0.0"))
     TOP_P = float(os.getenv('TOP_P', "0.8"))
-    TEST_SIZE = float(os.getenv('N_OUTPUTS', "1.0"))
+    TEST_SIZE = float(os.getenv('TEST_SIZE', "1.0"))
     RANDOM_STATE = int(os.getenv('RANDOM_STATE', "42"))
     BATCH_SIZE = int(os.getenv('BATCH_SIZE', "1"))
     N_OUTPUTS = int(os.getenv('N_OUTPUTS', "1"))
@@ -55,6 +55,18 @@ if __name__ == "__main__":
     DATA_DIR = Path(os.getenv('DATA_DIR', './data'))
     OUTPUT_DIR = Path(os.getenv('OUTPUT_DIR', str(DATA_DIR)))
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Do not waste time if the experiment has already been run
+    # by looking for the existence of a .yaml file named after the EXPERIMENT_ID
+    for file in DATA_DIR.glob('**/*.yaml'):
+        if file.is_file() and file.stem == EXPERIMENT_ID:
+            print(f'Experiment with ID {EXPERIMENT_ID[:8]} already exists in {file.parent}', file=sys.stderr)
+            exit(0)
+
+    print(f'Running experiment ID {EXPERIMENT_ID[:8]}', file=sys.stderr)
+    print(f'Output directory: {OUTPUT_DIR}', file=sys.stderr)
+    print(f'Experiment footprint:\n\t{EXPERIMENT_FOOTPRINT_YAML.replace("\n", "\n\t")}', file=sys.stderr)
+
 
     sampling_params = SamplingParams(
         n=N_OUTPUTS, 
@@ -98,7 +110,8 @@ if __name__ == "__main__":
         })
 
 
-    prompts = prompts[:100]
+    # prompts = prompts[:int(len(prompts)*TEST_SIZE)] # to select a portion of the test set
+    prompts = prompts[:100] # to quick debug 
 
     batches = [prompts[i:i+BATCH_SIZE] for i in range(0, len(prompts), BATCH_SIZE)]
 
