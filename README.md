@@ -100,7 +100,7 @@ Accuracy: 83.0
 ----------------------
 ```
 
-3) `{EXPERIMENT_ID*.yaml}` to store the hyperparameters used during the experiment.
+3) `{EXPERIMENT_ID}.yaml` to store the hyperparameters used during the experiment.
 
 If an experiment has already been conducted in a previous run, the output will indicate that it has been skipped. Here’s an example of the expected output:
 ```bash
