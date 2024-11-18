@@ -98,4 +98,9 @@ Accuracy: 83.0
 ----------------------
 ```
 
+If an experiment has already been conducted in a previous run, the output will indicate that it has been skipped. Here’s an example of the expected output:
+```bash
+experiment-cot_1       | Experiment with ID 23c1ff40 already exists in /data/2024-11-18-15-42-26-cot
+experiment-self-cot_1  | Experiment with ID 89609009 already exists in /data/2024-11-18-16-07-29-self-cot
+```
 
