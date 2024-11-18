@@ -67,7 +67,7 @@ if __name__ == "__main__":
         model=MODEL_ID,
         gpu_memory_utilization=.95,
         dtype="auto",
-        enforce_eager=True,
+        #enforce_eager=True,
         trust_remote_code=True,
         tensor_parallel_size=1,
         seed=RANDOM_STATE
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         })
 
 
-    prompts = prompts[:int(len(prompts)*TEST_SIZE)]
+    prompts = prompts[:100]
 
     batches = [prompts[i:i+BATCH_SIZE] for i in range(0, len(prompts), BATCH_SIZE)]
 
