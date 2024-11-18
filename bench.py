@@ -52,7 +52,8 @@ if __name__ == "__main__":
     EXPERIMENT_ID = sha512(EXPERIMENT_FOOTPRINT_YAML.encode()).hexdigest()
 
     # Ensure the output directory exists
-    OUTPUT_DIR = Path(os.getenv('OUTPUT_DIR', "./out"))
+    DATA_DIR = Path(os.getenv('DATA_DIR', './data'))
+    OUTPUT_DIR = Path(os.getenv('OUTPUT_DIR', str(DATA_DIR)))
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     sampling_params = SamplingParams(
@@ -69,6 +70,7 @@ if __name__ == "__main__":
         enforce_eager=True,
         trust_remote_code=True,
         tensor_parallel_size=1,
+        seed=RANDOM_STATE
     )
 
     dataset = load_dataset(path='openai/gsm8k', name="main", split="test")
@@ -96,14 +98,13 @@ if __name__ == "__main__":
         })
 
 
-    # consider only 100 questions
-    prompts = prompts[:100]
+    prompts = prompts[:len(prompts)*TEST_SIZE]
 
     batches = [prompts[i:i+BATCH_SIZE] for i in range(0, len(prompts), BATCH_SIZE)]
 
    
     predictions = []
-    with open(f"out_{MODE}.jsonl", 'a') as f:
+    with open(f"{OUTPUT_DIR}/out_{MODE}.jsonl", 'a') as f:
         for id_batch, batch in enumerate(tqdm(batches)):   
             input_prompts = [el['prompt'] for el in batch]
             gold_answers = [el['answer'] for el in batch]
@@ -128,4 +129,9 @@ if __name__ == "__main__":
                     json.dump({"gold_answer": gold_answers[id_out], "final_answer": prediction, "predictions": maj_preds}, f, ensure_ascii=False)
                     f.write('\n')
 
-    get_accuracy(answers[:len(predictions)], predictions)
+    accuracy = get_accuracy(answers[:len(predictions)], predictions)
+    print("ACCURACY:", accuracy)
+
+    with open(f"{OUTPUT_DIR}/accuracy.txt", 'a') as f:
+        f.write(f"Experiment ID: {EXPERIMENT_ID}\nAccuracy: {accuracy}\n----------------------\n\n")
+    
