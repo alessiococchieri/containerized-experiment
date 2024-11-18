@@ -28,7 +28,7 @@ The primary goal is to verify whether **Self-Consistency Chain-of-Thought** resu
 
 We use the widely-used **vLLM** library to run evaluations with the LLM. vLLM is a fast and easy-to-use library designed for LLM inference and serving, integrating with popular Hugging Face models. It supports high-throughput serving with various decoding algorithms, including batch decoding, which significantly speeds up inference.
 
-However, the library does not support running multiple instances of the process on the same device. As a result, experiments are split across two separate GPUs: one GPU is used for **Greedy CoT** and the other for **Self-CoT**. The number of experiments that can be run in parallel thus depends on the number of available GPUs.
+However, the library does not support running multiple instances of the process on the same device. As a result, experiments are split across two separate GPUs: one GPU is used for **Greedy CoT** and the other for **Self-CoT**.
 
 This is achieved in the `docker-compose` file by adding the following lines to specify the device type and ID:
 
@@ -51,9 +51,9 @@ deploy:
 ```
 
 *NOTES*:
-- *Limitations*: In this setup, the experiment is limited to running on two GPUs, one for each decoding modality.
+- *Limitations*: The number of experiments that can be run in parallel depends on the number of available GPUs. In this setup, the experiment is limited to running on two GPUs, one for each decoding modality (CoT or Self-CoT).
 - *Extensibility*: The project can be easily extended to consider additional configurations, such as:
-  - Multiple LLMs as baseline models.
+  - Multiple LLMs as baselines.
   - Multiple benchmarks for broader evaluation.
   - Various decoding settings for the Self-CoT modality (e.g., different temperature or top-p values).
 
