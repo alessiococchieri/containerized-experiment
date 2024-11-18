@@ -1,0 +1,31 @@
+services:
+  experiment-cot:
+    build: &experiment_build
+      context: .
+      dockerfile: Dockerfile
+    volumes: &volumes
+      - ./data:/data
+    hostname: cot
+    environment:
+      DATA_OWNER: &owner 1157:1157
+      MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
+      MODE: cot
+      TEMPERATURE: 0.0
+      TOP_P: 0.8
+      TEST_SIZE: 0.1
+      BATCH_SIZE: 4
+      N_OUTPUTS: 1
+
+  experiment-self-cot:
+    build: *experiment_build
+    volumes: *volumes
+    hostname: self-cot
+    environment:
+      DATA_OWNER: *owner
+      MODEL_ID: Qwen/Qwen2.5-Math-1.5B-Instruct
+      MODE: self-cot
+      TEMPERATURE: 0.7
+      TOP_P: 0.8
+      TEST_SIZE: 0.1
+      BATCH_SIZE: 4
+      N_OUTPUTS: 4
